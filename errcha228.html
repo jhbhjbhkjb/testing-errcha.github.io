@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERRCHA COIN Clicker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .title {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .balance {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .click-button {
+            font-size: 32px;
+            padding: 20px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .upgrade-button {
+            font-size: 24px;
+            padding: 10px 20px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .upgrade-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="title">ERRCHA COIN</div>
+    <div class="balance">Balance: <span id="balance">0</span> ERRCHA COIN</div>
+    <button class="click-button" onclick="clickButton()">ERRCHA</button>
+    <button class="upgrade-button" onclick="showUpgrade()">Upgrade</button>
+
+    <div id="upgrade-modal" class="upgrade-modal hidden">
+        <h2>Upgrades</h2>
+        <button onclick="buyUpgrade('multiTap')">Multi tap (100 coins) - +1 per tap</button>
+        <button onclick="buyUpgrade('passiveEarn')">Passive earn (100 coins) - +10 every 10s</button>
+        <button onclick="closeUpgrade()">Close</button>
+    </div>
+
+    <script>
+        let balance = 0;
+        let multiTap = 1;
+        let passiveEarn = 0;
+
+        function clickButton() {
+            balance += multiTap;
+            document.getElementById('balance').textContent = balance;
+        }
+
+        function showUpgrade() {
+            document.getElementById('upgrade-modal').classList.remove('hidden');
+        }
+
+        function closeUpgrade() {
+            document.getElementById('upgrade-modal').classList.add('hidden');
+        }
+
+        function buyUpgrade(type) {
+            if (balance >= 100) {
+                balance -= 100;
+                if (type === 'multiTap') {
+                    multiTap += 1;
+                } else if (type === 'passiveEarn') {
+                    passiveEarn += 10;
+                }
+                document.getElementById('balance').textContent = balance;
+            } else {
+                alert('Not enough coins!');
+            }
+        }
+
+        setInterval(() => {
+            balance += passiveEarn;
+            document.getElementById('balance').textContent = balance;
+        }, 10000);
+    </script>
+</body>
+</html>
