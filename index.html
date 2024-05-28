@@ -9,6 +9,13 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            background-color: #d3d3d3; /* Серый фон */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
         .title {
             font-size: 48px;
@@ -20,13 +27,13 @@
         }
         .click-button {
             font-size: 32px;
-            padding: 20px;
-            border-radius: 50%;
+            padding: 40px;
+            border-radius: 50%; /* Круглая кнопка */
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Перенести кнопку UPGRADE ниже */
         }
         .upgrade-button {
             font-size: 24px;
@@ -53,7 +60,7 @@
 </head>
 <body>
     <div class="title">ERRCHA COIN</div>
-    <div class="balance">Balance: <span id="balance">0</span> ERRCHA COIN</div>
+    <div class="balance">$<span id="balance">0</span></div>
     <button class="click-button" onclick="clickButton()">ERRCHA</button>
     <button class="upgrade-button" onclick="showUpgrade()">Upgrade</button>
 
@@ -71,7 +78,7 @@
 
         function clickButton() {
             balance += multiTap;
-            document.getElementById('balance').textContent = balance;
+            document.getElementById('balance').textContent = balance.toLocaleString();
         }
 
         function showUpgrade() {
@@ -90,7 +97,7 @@
                 } else if (type === 'passiveEarn') {
                     passiveEarn += 10;
                 }
-                document.getElementById('balance').textContent = balance;
+                document.getElementById('balance').textContent = balance.toLocaleString();
             } else {
                 alert('Not enough coins!');
             }
@@ -98,7 +105,7 @@
 
         setInterval(() => {
             balance += passiveEarn;
-            document.getElementById('balance').textContent = balance;
+            document.getElementById('balance').textContent = balance.toLocaleString();
         }, 10000);
     </script>
 </body>
